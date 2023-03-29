@@ -2,7 +2,7 @@ require "spec_helper"
 
 RSpec.describe "Bamboozled" do
   it "takes HTTParty options as a parameter" do
-    expect(Bamboozled::Base).to receive(:new).with(subdomain: "x", api_key: "x", httparty_options: { log_format: :curl }, api_base: nil)
+    expect(Bamboozled::Base).to receive(:new).with(subdomain: "x", api_key: "x", httparty_options: { log_format: :curl }, api_url: nil)
     Bamboozled.client(subdomain: "x", api_key: "x", httparty_options: { log_format: :curl })
   end
 

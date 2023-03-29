@@ -2,7 +2,7 @@ require "spec_helper"
 
 RSpec.describe "Bamboozled::Base" do
   let(:base) do
-    Bamboozled::Base.new(subdomain: "x", api_key: "x", httparty_options: {log_format: :curl}, api_base: 'newapi.com/url')
+    Bamboozled::Base.new(subdomain: "x", api_key: "x", httparty_options: {log_format: :curl}, api_url: 'newapi.com/url')
   end
 
   it "passes HTTParty options to Bamboozled::API::Employee constructor" do
