@@ -30,6 +30,7 @@ module Bamboozled
             "User-Agent"   => "Bamboozled/#{Bamboozled::VERSION}"
           }.update(options[:headers] || {})
         })
+
         response = HTTParty.send(method, "#{path_prefix}#{path}", httparty_options)
         params[:response] = response.inspect.to_s
 
