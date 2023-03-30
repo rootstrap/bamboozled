@@ -34,7 +34,7 @@ module Bamboozled
       def date_filter(date)
         return '' if date.nil?
 
-        "<value>#{date.to_iso8601}</value>"
+        "<value>#{date.iso8601}</value>"
       end
 
       def fields_xml(fields)
