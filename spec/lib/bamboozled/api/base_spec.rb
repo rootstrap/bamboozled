@@ -15,4 +15,10 @@ RSpec.describe "Bamboozled::API::Base" do
     base = Bamboozled::API::Base.new("x", "x", { log_format: :curl })
     base.send(:request, :get, "test")
   end
+
+  context 'when changes API BASE url' do
+    it "does not raise an error" do
+      expect { Bamboozled::API::Base.new("x", "x", { log_format: :curl }, "new_api.url") }.not_to raise_error
+    end
+  end
 end

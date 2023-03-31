@@ -31,8 +31,13 @@ module Bamboozled
             "User-Agent"   => "Bamboozled/#{Bamboozled::VERSION}"
           }.update(options[:headers] || {})
         })
+<<<<<<< HEAD
 
+=======
+        #byebug
+>>>>>>> facc75d (added tests)
         response = HTTParty.send(method, "#{path_prefix}#{path}", httparty_options)
+        #byebug
         params[:response] = response.inspect.to_s
 
         case response.code

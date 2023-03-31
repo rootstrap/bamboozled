@@ -137,4 +137,22 @@ RSpec.describe "Employees" do
       expect(employee["headers"]).to eq(expected_headers)
     end
   end
+
+  context 'when an API BASE is set' do
+    before do
+      @client = Bamboozled.client(
+        subdomain: "subdomain", api_key: "new_api_key", api_url: 'https://new.api/url/'
+      )
+    end
+
+    it 'gets all employees from the new API' do
+      response = File.new("spec/fixtures/all_employees.json")
+      stub_request(:any, "https://new_api_key:x@new.api/url/employees/directory").to_return(response)
+      employees = @client.employee.all
+
+      expect(employees).to be_a Array
+      expect(employees.first.count).to eq 7
+      expect(1).to eq 1
+    end
+  end
 end
