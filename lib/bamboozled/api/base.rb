@@ -84,7 +84,7 @@ module Bamboozled
       end
 
       def path_prefix
-        return @api_url if @api_url.present?
+        return @api_url unless @api_url.nil?
 
         "https://api.bamboohr.com/api/gateway.php/#{subdomain}/v1/"
       end
