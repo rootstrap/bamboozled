@@ -16,7 +16,7 @@ RSpec.describe "Bamboozled::API::Base" do
     base.send(:request, :get, "test")
   end
 
-  context 'when changes API BASE url' do
+  context 'context "when changing the base API url"' do
     subject { Bamboozled::API::Base.new("x", "x", { log_format: :curl }, "https://new_api/bamboo_url/") }
 
     it "does not raise an error" do

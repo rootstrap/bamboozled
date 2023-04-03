@@ -138,10 +138,10 @@ RSpec.describe "Employees" do
     end
   end
 
-  context 'when an API BASE is set' do
+  context "when an API BASE is set" do
     before do
       @client = Bamboozled.client(
-        subdomain: "subdomain", api_key: "new_api_key", api_url: 'https://new.bamboo/url/'
+        subdomain: "subdomain", api_key: "new_api_key", api_url: "https://new.bamboo/url/"
       )
     end
 
