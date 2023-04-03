@@ -5,7 +5,7 @@ require "bamboozled/version"
 
 Gem::Specification.new do |spec|
   spec.name          = "bamboozled"
-  spec.version       = '1.0.0'
+  spec.version       = Bamboozled::VERSION
   spec.authors       = ["Mark Rickert"]
   spec.email         = ["mjar81@gmail.com"]
   spec.summary       = "A Ruby wrapper for the BambooHR API http://www.bamboohr.com/"
