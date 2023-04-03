@@ -141,18 +141,52 @@ RSpec.describe "Employees" do
   context 'when an API BASE is set' do
     before do
       @client = Bamboozled.client(
-        subdomain: "subdomain", api_key: "new_api_key", api_url: 'https://new.api/url/'
+        subdomain: "subdomain", api_key: "new_api_key", api_url: 'https://new.bamboo/url/'
       )
     end
 
     it 'gets all employees from the new API' do
       response = File.new("spec/fixtures/all_employees.json")
-      stub_request(:any, "https://new_api_key:x@new.api/url/employees/directory").to_return(response)
+      stub_request(:get, "https://new_api_key:x@new.bamboo/url/employees/directory").to_return(response)
       employees = @client.employee.all
 
       expect(employees).to be_a Array
       expect(employees.first.count).to eq 7
       expect(1).to eq 1
+    end
+
+    describe '#update' do
+      it "updates an employee in BambooHR" do
+        xml = YAML.load_file("spec/fixtures/update_employee_xml.yml")
+        response = File.new("spec/fixtures/update_employee_response.json")
+        details = JSON.parse(File.read("spec/fixtures/update_employee_details.json"))
+        url = "https://new_api_key:x@new.bamboo/url/employees/1234"
+
+        stub_request(:post, url).with(xml).to_return(response)
+        employee = @client.employee.update("1234", details)
+        expected_headers = {
+          "content-type" => ["application/json; charset=utf-8"],
+          "date"         => ["Tue, 17 Jun 2014 19:25:35 UTC"]
+        }
+
+        expect(employee["headers"]).to eq(expected_headers)
+      end
+    end
+
+    describe "#add" do
+      it "creates a new employee in BambooHR" do
+        xml = YAML.load_file("spec/fixtures/add_employee_xml.yml")
+        response = File.new("spec/fixtures/add_employee_response.json")
+        details = JSON.parse(File.read("spec/fixtures/add_employee_details.json"))
+
+        stub_request(:post, "https://new_api_key:x@new.bamboo/url/employees/")
+          .with(xml).to_return(response)
+
+        employee = @client.employee.add(details)
+        location = employee["headers"]["location"]
+
+        expect(location).to eq "https://api.bamboohr.com/api/gateway.php/alphasights/v1/employees/44259"
+      end
     end
   end
 end

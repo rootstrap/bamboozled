@@ -32,12 +32,14 @@ module Bamboozled
           }.update(options[:headers] || {})
         })
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 =======
         #byebug
 >>>>>>> facc75d (added tests)
+=======
+>>>>>>> a66ac08 (added specs)
         response = HTTParty.send(method, "#{path_prefix}#{path}", httparty_options)
-        #byebug
         params[:response] = response.inspect.to_s
 
         case response.code
