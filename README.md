@@ -128,7 +128,7 @@ client = Bamboozled.client(subdomain: "your_subdomain", api_key: "your_api_key",
 
 ```
 
-If you set the <b>api_url</b> param when create the client, the gem will <b>ignore the subdomain</b> and directly will request information to the url you have set. Please notice and follow the structure of the API URL. 
+If you set the <b>api_url</b> param when creating the client, the gem will <b>ignore the subdomain</b> and it will request information directly to the url you have set. Please notice and follow the structure of the API URL.
 
 ### Reports
 
