@@ -28,10 +28,16 @@ module Bamboozled
 
       def last_changed_filter(include_null, last_changed_date)
         last_changed_filter = {}
-        last_changed_filter[:includeNull] = include_null.to_s
+        last_changed_filter[:includeNull] = include_null_filter(include_null)
         last_changed_filter[:value] = last_changed_date
 
         last_changed_filter
+      end
+
+      def include_null_filter(include_null)
+        return "yes" if include_null
+
+        return "no"
       end
     end
   end
