@@ -23,7 +23,7 @@ module Bamboozled
         body[:fields] = fields || FieldCollection.all_names
         body[:filters] = { lastChanged: last_changed_filter(include_null, last_changed_date) }
 
-        body
+        body.to_json
       end
 
       def last_changed_filter(include_null, last_changed_date)

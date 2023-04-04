@@ -17,7 +17,7 @@ RSpec.describe "Reports" do
     end
   end
 
-  context "When there are lsat changed date filters" do
+  context "When there are last changed date filters" do
     it "Creates a filtered custom report" do
       response = File.new("spec/fixtures/custom_report_filtered.json")
       stub_request(:any, /.*api\.bamboohr\.com.*/).to_return(response)
