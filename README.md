@@ -125,9 +125,11 @@ client.time_off.whos_out(Time.now, "2014-12-31")
 ```ruby
 # Get a list of employees with specified fields
 # Send `:all` for `fields` to get all fields.
+# Set `last_changed_date` to filter employees by their last update date
+# Set `include_null` to false to avoid pulling information for employees with null last update date
 # Note that this can get a list of employees with additional fields via a single
 # API request instead of one per employee when using the `employees` endpoint.
-client.report.custom(fields, format = "JSON")
+client.report.custom(fields, include_null = true, last_changed_date = nil, format = "JSON")
 ```
 
 

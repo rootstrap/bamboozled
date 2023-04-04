@@ -6,30 +6,36 @@ module Bamboozled
         request(:get, "reports/#{number}?format=#{format.upcase}&fd=#{fd_param.yesno}")
       end
 
-      def custom(fields, include_null = true ,date = nil,  format='JSON' )
-        url = URI("#{path_prefix}reports/custom?format=#{format.upcase}")
-        puts url
-        http = Net::HTTP.new(url.host, url.port)
-        http.use_ssl = true
-        request = Net::HTTP::Post.new(url)
-        request["content-type"] = 'application/json'
-        request.basic_auth auth[:username], auth[:password]
-        request.body = body(fields, include_null, date).to_json
-        response = http.request(request)
-        response.read_body
+      def custom(fields, include_null = true, last_changed_date = nil,  format = "JSON")
+        options = {
+          body: body(fields, include_null, last_changed_date),
+          headers: { "Content-Type" => "application/json" }
+        }
+
+        response = request(:post, "reports/custom?format=#{format.upcase}", options)
+        response["employees"]
       end
 
       private
 
-      def body(fields, include_null, date)
+      def body(fields, include_null, last_changed_date)
         body = {}
-        body[:fields] = fields || FieldCollection.all_names
-        last_changed_object = {}
-        last_changed_object[:includeNull] = include_null.to_s
-        last_changed_object[:value] = date
+        body[:fields] = if fields == :all
+                          FieldCollection.all_names
+                        else
+                          fields
+                        end
+        body[:filters] = { lastChanged: last_changed_filter(include_null, last_changed_date) }
 
-        body[:filters] = { lastChanged: last_changed_object }
-        body
+        body.to_json
+      end
+
+      def last_changed_filter(include_null, last_changed_date)
+        last_changed_filter = {}
+        last_changed_filter[:includeNull] = include_null.yesno
+        last_changed_filter[:value] = last_changed_date
+
+        last_changed_filter
       end
     end
   end
