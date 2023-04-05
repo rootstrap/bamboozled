@@ -6,10 +6,11 @@ module Bamboozled
     class Base
       attr_reader :subdomain, :api_key
 
-      def initialize(subdomain, api_key, httparty_options = {})
+      def initialize(subdomain, api_key, httparty_options = {}, api_url = nil)
         @subdomain = subdomain
         @api_key = api_key
         @httparty_options = httparty_options || {}
+        @api_url = api_url
       end
 
       protected
@@ -30,7 +31,6 @@ module Bamboozled
             "User-Agent"   => "Bamboozled/#{Bamboozled::VERSION}"
           }.update(options[:headers] || {})
         })
-
         response = HTTParty.send(method, "#{path_prefix}#{path}", httparty_options)
         params[:response] = response.inspect.to_s
 
@@ -78,6 +78,8 @@ module Bamboozled
       end
 
       def path_prefix
+        return @api_url unless @api_url.nil?
+
         "https://api.bamboohr.com/api/gateway.php/#{subdomain}/v1/"
       end
     end

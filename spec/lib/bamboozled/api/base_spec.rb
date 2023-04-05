@@ -15,4 +15,16 @@ RSpec.describe "Bamboozled::API::Base" do
     base = Bamboozled::API::Base.new("x", "x", { log_format: :curl })
     base.send(:request, :get, "test")
   end
+
+  context 'context "when changing the base API url"' do
+    subject { Bamboozled::API::Base.new("x", "x", { log_format: :curl }, "https://new_api/bamboo_url/") }
+
+    it "does not raise an error" do
+      expect { subject }.not_to raise_error
+    end
+
+    it 'changes API BASE' do
+      expect(subject.send(:path_prefix)).to eq("https://new_api/bamboo_url/")
+    end
+  end
 end

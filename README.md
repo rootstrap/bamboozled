@@ -120,6 +120,16 @@ client.time_off.requests(:employeeId: employee_id, start: Time.now)
 client.time_off.whos_out(Time.now, "2014-12-31")
 ```
 
+### Using a custom API
+This is headed to replace completely the default Bamboo URL used to send and request data in order to make it more flexible. Specially useful for testing purposes.
+
+```ruby
+client = Bamboozled.client(subdomain: "your_subdomain", api_key: "your_api_key", api_url: "https://my.new/bamboo/url/")
+
+```
+
+If you set the <b>api_url</b> param when creating the client, the gem will <b>ignore the subdomain</b> and it will request information directly to the url you have set. Please notice and follow the structure of the API URL.
+
 ### Reports
 
 ```ruby
