@@ -12,5 +12,5 @@ group :development, :test do
   gem "guard-rubocop", require: false
   gem "rubocop", "~> 0.63.1", require: false
   gem "rubocop-rspec", require: false
-
+  gem "byebug", require: true
 end
