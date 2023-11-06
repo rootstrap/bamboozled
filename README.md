@@ -31,6 +31,9 @@ repo. Some of the features described might not be available in older versions of
 the gem (including the current stable version). Please consult the relevant git
 tag (e.g. v0.0.7) if you need documentation for a specific Bamboozled version.
 
+## Fork
+This repository is forked from repository [bamboozled](https://github.com/method-inc/bamboozled)
+
 ## Installation
 
 Bamboozled's installation follows the standard gem installation process:
